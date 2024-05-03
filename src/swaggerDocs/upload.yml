@@ -1,0 +1,33 @@
+paths:
+  /cloudinary-upload-image:
+    post:
+      tags:
+        - IMAGE UPLOADS
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-      
+        - in: formData
+          name: file
+          type: file
+          required: true
+      responses:
+        200:
+          description: Successful Upload
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Image uploaded successfully",
+                "responseCode": 200,
+                "responseData": {
+                  "publicId": "NESTFINDER/s0fvbvjrd8svzgjko50o",
+                  "fileUrl": "https://res.cloudinary.com/lilstex/image/upload/v1712239068/NESTFINDER/s0fvbvjrd8svzgjko50o.png"
+                },
+                "timestamp": "2024-04-04T13:57:49.567Z"
+              }
+

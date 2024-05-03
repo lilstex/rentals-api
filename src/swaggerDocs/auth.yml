@@ -1,0 +1,486 @@
+paths:
+  /login:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: LOGIN ENDPOINT FOR APP USER.
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: User login
+          description: It enables all users to login
+          required: true
+          schema:
+            $ref: "#/definitions/login"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Login successful",
+                "responseCode": 200,
+                "responseData": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoSWQiOiI2NjBkM2E5YTE1ZWU0MTRhNjUxZGE1MTIiLCJlbWFpbCI6ImxpbHN0ZXhAZ21haWwuY29tIiwiaWF0IjoxNzEyMTQzMDg5LCJleHAiOjE3MTIxNjEwODl9.R75-xzR3dRmj_XgJrnD5z_vYVrjvJS8kxAwUw_6wFZk",
+                  "authId": "660d3a9a15ee414a651da512",
+                  "email": "lilstex@gmail.com",
+                  "isAccountVerified": true,
+                  "createdAt": "2024-04-03T11:15:22.080Z"
+                },
+                "timestamp": "2024-04-03T11:18:09.092Z"
+              }
+
+  /signup:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: ACCOUNT REGISTRATION ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Account registration
+          description: It enable users to register account
+          required: true
+          schema:
+            $ref: "#/definitions/accountRegistration"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Acccount Created Successfully",
+                "responseCode": 200,
+                "responseData": {
+                  "authId": "660d3a9a15ee414a651da512",
+                  "email": "lilstex@gmail.com",
+                  "isAccountVerified": false,
+                  "createdAt": "2024-04-03T11:15:22.080Z"
+                },
+                "timestamp": "2024-04-03T11:16:43.179Z"
+              }
+
+  /verify-account:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: ACCOUNT VERIFICATION ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Account verification
+          description: It enables a user to verify account
+          required: true
+          schema:
+            $ref: "#/definitions/verifyAccount"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Account verified successfully!",
+                "responseCode": 200,
+                "responseData": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoSWQiOiI2NjBkM2E5YTE1ZWU0MTRhNjUxZGE1MTIiLCJlbWFpbCI6ImxpbHN0ZXhAZ21haWwuY29tIiwiaWF0IjoxNzEyMTQzMDUzLCJleHAiOjE3MTIxNjEwNTN9.oXJzHlDE18X9l2hvnrL5WHjwXBJyxt7L7ZGpdzTTIqc",
+                  "authId": "660d3a9a15ee414a651da512",
+                  "email": "lilstex@gmail.com",
+                  "isAccountVerified": true,
+                  "createdAt": "2024-04-03T11:15:22.080Z"
+                },
+                "timestamp": "2024-04-03T11:17:33.576Z"
+              }
+
+  /re-send-email-code:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: RESEND VERIFICATION CODE ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Send verification code
+          description: It enables sending of email codes
+          required: true
+          schema:
+            $ref: "#/definitions/resend-email-code"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "email verification code sent successfully",
+                "responseCode": 200,
+                "timestamp": "2024-02-05T11:21:03.343Z",
+              }
+
+  /forgot-password:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: RESET PASSWORD ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Send password reset link
+          description: It enables sending of email password links
+          required: true
+          schema:
+            $ref: "#/definitions/forgot-password"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Password reset link sent successfully",
+                "responseCode": 200,
+                "timestamp": "2024-04-03T11:18:52.104Z"
+              }
+
+  /resend-password-reset-link:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: RESENT RESET PASSWORD LINK ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Send password reset link
+          description: It enables sending of email password links
+          required: true
+          schema:
+            $ref: "#/definitions/resend-password-reset-link"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "password reset link sent successfully",
+                "responseCode": 200,
+                "timestamp": "2024-02-05T11:22:48.669Z",
+              }
+
+  /reset-password:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: UPDATE PASSWORD ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Update password
+          description: It enables users to update their password
+          required: true
+          schema:
+            $ref: "#/definitions/resetPassword"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Password changed successfully",
+                "responseCode": 200,
+                "timestamp": "2024-02-05T11:24:49.410Z",
+              }
+
+  /change-password:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: CHANGE PASSWORD ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXN0aW4uYW1hZGlAd2F5YXBheWNoYXQuY29tIiwiZXhwIjoxNjU5NjM1MDU4fQ.DY6tKorON5A7fr9iuOU1wt48LnKi2ACu3NtFAh6t8I4
+          required: true
+        - in: body
+          name: Change password management
+          description: It enables users to change their account password
+          required: true
+          schema:
+            $ref: "#/definitions/changePassword"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Password changed successfully",
+                "responseCode": 200,
+                "timestamp": "2024-02-05T11:26:22.411Z",
+              }
+
+  /setup-oauth:
+    post:
+      tags:
+        - AUTHENTICATION
+      summary: SETUP OAUTH ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: Google OAuth
+          description: It enables all users to signin/signup via google, apple, metamask
+          required: true
+          schema:
+            $ref: "#/definitions/setupOauth"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Login successful",
+                "responseCode": 200,
+                "responseData": {
+                  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoSWQiOiI2NjBkM2JjMDE1ZWU0MTRhNjUxZGE1MjIiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzEyMTQzMjk2LCJleHAiOjE3MTIxNjEyOTZ9.fS3j4HfJvCZamv3ZolFRjXF8FKnFCvwOlC-pdSqmMHY",
+                  "authId": "660d3bc015ee414a651da522",
+                  "email": "john@gmail.com",
+                  "isAccountVerified": true,
+                  "isGoogleSignIn": true,
+                  "createdAt": "2024-04-03T11:15:22.080Z"
+                },
+                "timestamp": "2024-04-03T11:21:36.567Z"
+              }
+
+  /delete-account:
+    delete:
+      tags:
+        - AUTHENTICATION
+      summary: DELETE ACCOUNT ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXN0aW4uYW1hZGlAd2F5YXBheWNoYXQuY29tIiwiZXhwIjoxNjU5NjM1MDU4fQ.DY6tKorON5A7fr9iuOU1wt48LnKi2ACu3NtFAh6t8I4
+          required: true
+        - in: body
+          name: Delete account
+          description: It enables users to delete their account
+          required: true
+          schema:
+            $ref: "#/definitions/changePassword"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Account deleted successfully",
+                "responseCode": 200,
+                "timestamp": "2024-04-03T11:23:44.978Z"
+              }
+
+  /update-profile:
+    put:
+      tags:
+        - USER MANAGEMENT
+      summary: UPDATE ACCOUNT PROFILE ENDPOINT
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXN0aW4uYW1hZGlAd2F5YXBheWNoYXQuY29tIiwiZXhwIjoxNjU5NjM1MDU4fQ.DY6tKorON5A7fr9iuOU1wt48LnKi2ACu3NtFAh6t8I4
+          required: true
+        - in: body
+          name: Update user profile
+          description: It enables users to update their profile
+          required: true
+          schema:
+            $ref: "#/definitions/updateProfile"
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "Account profile updated successfully",
+                "responseCode": 200,
+                "responseData": {
+                  "authId": "660d3a9a15ee414a651da512",
+                  "email": "lilstex@gmail.com",
+                  "isAccountVerified": true,
+                  "location": "central  district garki 1, abuja nigeria",
+                  "phoneNumber": "+2348154453423",
+                  "profileImage": "https://i.pravatar.cc/209",
+                  "createdAt": "2024-04-03T11:15:22.080Z"
+                },
+                "timestamp": "2024-04-03T11:25:11.810Z"
+              }
+
+  /get-user-profile:
+    get:
+      tags:
+        - USER MANAGEMENT
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          default: serial eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXN0aW4uYW1hZGlAd2F5YXBheWNoYXQuY29tIiwiZXhwIjoxNjU5NjM1MDU4fQ.DY6tKorON5A7fr9iuOU1wt48LnKi2ACu3NtFAh6t8I4
+          required: true
+        - in: query
+          name: userId
+          type: string
+          default: 660d3a9a15ee414a651da512
+          required: true
+
+      responses:
+        200:
+          description: Successful response
+          examples:
+            application/json:
+              {
+                "responseStatus": true,
+                "responseMessage": "User profile fetched successfully",
+                "responseCode": 200,
+                "responseData": {
+                  "authId": "660d3a9a15ee414a651da512",
+                  "email": "lilstex@gmail.com",
+                  "isAccountVerified": true,
+                  "location": "central  district garki 1, abuja nigeria",
+                  "phoneNumber": "+2348154453423",
+                  "profileImage": "https://i.pravatar.cc/209",
+                  "createdAt": "2024-04-03T11:15:22.080Z"
+                },
+                "timestamp": "2024-04-03T11:25:11.810Z"
+              }
+
+
+definitions: # Schema definition for request body
+  accountRegistration:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+      password:
+        type: string
+        default: password
+
+  login:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+      password:
+        type: string
+        default: password
+
+  verifyAccount:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+      code:
+        type: number
+        default: 123456
+
+  resend-email-code:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+
+  forgot-password:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+
+  resend-password-reset-link:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+
+  verifyToken:
+    type: object
+    properties:
+      token:
+        type: string
+        default: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhdXN0aW4uYW1hZGlAd2F5YXBheWNoYXQuY29tIiwiZXhwIjoxNjU5NjM1MDU4fQ.DY6tKorON5A7fr9iuOU1
+
+  resetPassword:
+    type: object
+    properties:
+      email:
+        type: string
+        default: lilstex@gmail.com
+      password:
+        type: string
+        default: password
+      token:
+        type: string
+        default: 520d651c3e8937836e6252629aaaca08ec435f9a507e9d8af31d74f4bf6f0820
+
+  changePassword:
+    type: object
+    properties:
+      password:
+        type: string
+        default: password
+
+  setupOauth:
+    type: object
+    properties:
+      oauthId:
+        type: string
+        default: 6765465g4cgt453432
+      email:
+        type: string
+        default: lilstex@gmail.com
+      oauthType:
+        type: string
+        default: google
+
+  updateProfile:
+    type: object
+    properties:
+      fullName:
+        type: string
+        default: John Doe
+      phoneNumber:
+        type: string
+        default:  "+2348154453423"
+      location:
+        type: string
+        default: central  district garki 1, abuja nigeria
+      profileImage:
+        type: string
+        default: https://i.pravatar.cc/209
