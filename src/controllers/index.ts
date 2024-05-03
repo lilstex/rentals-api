@@ -1,7 +1,7 @@
-import  auth  from "./auth";
-import  upload  from "./upload";
+import  AuthController  from "./auth";
+import  Upload  from "./upload";
 
 export { 
-    auth,  
-    upload,
+    AuthController,  
+    Upload,
 };

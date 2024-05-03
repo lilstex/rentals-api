@@ -1,6 +1,15 @@
-export = {
-    NOT_FOUND: (entity: string) => `${entity} does not exist yet`,
-    DUPLICATE_ENTRY: (entity: string) => `This ${entity} is already in use`,
-    SERVER_ERROR: (entity: string) => `Oops, something went wrong in ${entity} endpoint`,
-  };
-  
+class ErrorMessage {
+  NOT_FOUND(entity: string): string {
+    return `${entity} does not exist yet`;
+  }
+
+  DUPLICATE_ENTRY(entity: string): string {
+    return `This ${entity} is already in use`;
+  }
+
+  SERVER_ERROR(entity: string): string {
+    return `Oops, something went wrong in ${entity} endpoint`;
+  }
+}
+
+export = new ErrorMessage();

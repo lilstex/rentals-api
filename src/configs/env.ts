@@ -5,7 +5,7 @@ dotenv.config();
 
 interface Env {
   NODE_ENV: string;
-  PORT?: number;
+  PORT: number;
   DB_URL: string;
   DB_PROD_URL: string;
   JWT_KEY: string;
@@ -60,7 +60,7 @@ if (error) {
 
 const config: {
   env: string;
-  port?: number;
+  port: number;
   dbUrl: string;
   dbProdUrl: string;
   JWTKey: string;

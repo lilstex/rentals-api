@@ -1,52 +1,62 @@
-import * as dotenv from "dotenv";
-dotenv.config();
-
-import express from "express";
-import http from "http";
-import cors from "cors";
+import express, { Express, Request, Response, NextFunction } from 'express';
+import http from 'http';
+import cors from 'cors';
 import path from 'path';
-import swaggerUi from "swagger-ui-express";
+import swaggerUi from 'swagger-ui-express';
+import dotenv from 'dotenv';
+import routes from './routes';
+import { env, Swagger } from './configs';
+import { Security } from './middlewares';
+import { ResponseHandler } from './helpers';
 
+class App {
+  private app: Express;
+  private server: http.Server;
+  private port: number;
 
-import routes from "./routes";
-import { env, swagger } from "./configs";
-import { security } from "./middlewares";
-import { response } from "./helpers";
+  constructor() {
+    this.app = express();
+    this.server = http.createServer(this.app);
+    this.port = env.port;
 
-const app = express();
-const server = http.createServer(app);
-const { port } = env;
+    dotenv.config();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(
-  cors({
-    allowedHeaders: ["Content-Type", "authorization", "X-access-token"],
-  })
-);
+    this.setupExpress();
+    this.setupRoutes();
+    this.setupErrorHandler();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swagger));
+    if (require.main === module) {
+      this.server.listen(this.port, () => {
+        console.log(`NestFinder API is running on http://localhost:${this.port}/api-docs`);
+      });
+    }
+  }
 
-app.use(security);
-app.use("", routes);
-app.use((err: any, req: any, res: any, next: any) => {
-  return response(
-    res,
-    { status: false, message: "Internal server error" },
-    500
-  );
-});
+  private setupExpress(): void {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.static('public'));
+    this.app.set('view engine', 'ejs');
+    this.app.set('views', path.join(__dirname, 'views'));
+    this.app.use(cors({ allowedHeaders: ['Content-Type', 'authorization', 'X-access-token'] }));
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(Swagger));
+    this.app.use(Security.authenticate);
+  }
 
-if (require.main === module) {
-  server.listen(port, () => {
-    console.log(
-      `NestFinder API is running on http://localhost:${port}/api-docs`
-    );
-  });
+  private setupRoutes(): void {
+    this.app.use('', routes);
+  }
+
+  private setupErrorHandler(): void {
+    this.app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+      return ResponseHandler.sendResponse(res, { status: false, message: 'Internal server error' }, 500);
+    });
+  }
+
+  public getApp(): Express {
+    return this.app;
+  }
 }
 
-
-export = app;
+const appInstance = new App();
+export = appInstance.getApp();

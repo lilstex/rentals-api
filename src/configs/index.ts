@@ -1,13 +1,13 @@
 import env from "./env";
-import constants from "./constants";
-import swagger from "./swagger";
-import db from "./db";
+import Constants from "./constants";
+import Swagger from "./swagger";
+import DB from "./db";
 
 const modules = {
   env,
-  constants,
-  swagger,
-  db,
+  Constants,
+  Swagger,
+  DB,
 };
 
 export = modules;

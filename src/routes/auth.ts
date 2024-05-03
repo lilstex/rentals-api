@@ -1,96 +1,95 @@
 import { Router } from "express";
-import { auth, upload } from "../controllers";
-import { validate } from "../middlewares";
+import { AuthController, Upload } from "../controllers";
+import { ValidationMiddleware } from "../middlewares";
 import validator from "../validators/auth";
 import { singleUpload } from "../utils";
 
 const routes = Router();
 
-routes.get("/", auth.welcomeText);
+routes.get("/", AuthController.welcomeText);
 
 routes.post(
   '/signup',
-  validate(validator.accountRegistration),
-  auth.accountRegistration
+  ValidationMiddleware.validateMiddleware(validator.accountRegistration),
+  AuthController.accountRegistration
 );
 
 routes.post(
   '/login', 
-  validate(validator.login), 
-  auth.login
+  ValidationMiddleware.validateMiddleware(validator.login), 
+  AuthController.login
 );
 
 routes.post(
     '/verify-account',
-    validate(validator.verifyAccount),
-    auth.verifyAccount
+    ValidationMiddleware.validateMiddleware(validator.verifyAccount),
+    AuthController.verifyAccount
 );
   
 routes.post(
     '/validate-user-token',
-    validate(validator.validateUserToken),
-    auth.validateUserToken
+    ValidationMiddleware.validateMiddleware(validator.validateUserToken),
+    AuthController.validateUserToken
 );
   
 routes.post(
     '/re-send-email-code',
-    validate(validator.reSendEmailCode),
-    auth.reSendEmailCode
+    ValidationMiddleware.validateMiddleware(validator.reSendEmailCode),
+    AuthController.reSendEmailCode
 );
   
 routes.post(
     '/forgot-password',
-    validate(validator.forgotPassword),
-    auth.forgotPassword
+    ValidationMiddleware.validateMiddleware(validator.forgotPassword),
+    AuthController.forgotPassword
 );
   
 routes.post(
     '/resend-password-reset-link',
-    validate(validator.resendResetPassword),
-    auth.resendPasswordResetLink
+    ValidationMiddleware.validateMiddleware(validator.resendResetPassword),
+    AuthController.resendPasswordResetLink
 );
   
 routes.post(
     '/reset-password',
-    validate(validator.updatePassword),
-    auth.updatePassword
+    ValidationMiddleware.validateMiddleware(validator.updatePassword),
+    AuthController.updatePassword
 );
   
 routes.post(
     '/change-password',
-    validate(validator.changePassword),
-    auth.changePassword
+    ValidationMiddleware.validateMiddleware(validator.changePassword),
+    AuthController.changePassword
 );
   
 routes.delete(
     '/delete-account',
-    validate(validator.deleteAccount),
-    auth.deleteAccount
+    ValidationMiddleware.validateMiddleware(validator.deleteAccount),
+    AuthController.deleteAccount
 );
 
 routes.post(
     '/setup-oauth',
-    validate(validator.setupOAuth ),
-    auth.setupOAuth 
+    ValidationMiddleware.validateMiddleware(validator.setupOAuth ),
+    AuthController.setupOAuth 
 );
 
 routes.put(
     '/update-profile', 
-    validate(validator.updateProfile), 
-    auth.updateProfile
+    ValidationMiddleware.validateMiddleware(validator.updateProfile), 
+    AuthController.updateProfile
 );
 
 routes.get(
     '/get-user-profile', 
-    validate(validator.getUserProfile), 
-    auth.getUserProfile
+    ValidationMiddleware.validateMiddleware(validator.getUserProfile), 
+    AuthController.getUserProfile
 );
 
 routes.post(
     '/cloudinary-upload-image', 
     singleUpload, 
-    upload.uploadImage
+    Upload.uploadImage
 );
-  
   
 export default routes;

@@ -1,56 +1,69 @@
-import * as Joi from "joi";
+import Joi from 'joi';
 
-const authValidation = {
-  accountRegistration: {
+class AuthValidation {
+  accountRegistrationSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-  },
-  login: {
+  });
+
+  loginSchema = Joi.object({
     email: Joi.string().email().required(),
-    password:Joi.string().required(),
-  },
-  verifyAccount: {
+    password: Joi.string().required(),
+  });
+
+  verifyAccountSchema = Joi.object({
     email: Joi.string().email().required(),
-    code: Joi.number().required().required(),
-  },
-  validateUserToken: {
+    code: Joi.number().required(),
+  });
+
+  validateUserTokenSchema = Joi.object({
     token: Joi.string().required(),
-  },
-  reSendEmailCode: {
+  });
+
+  reSendEmailCodeSchema = Joi.object({
     email: Joi.string().email().required(),
-  },
-  forgotPassword: {
+  });
+
+  forgotPasswordSchema = Joi.object({
     email: Joi.string().email().required(),
-  },
-  resendResetPassword: {
+  });
+
+  resendResetPasswordSchema = Joi.object({
     email: Joi.string().email().required(),
-  },
-  updatePassword: {
+  });
+
+  updatePasswordSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     token: Joi.string().required(),
-  },
-  changePassword: {
+  });
+
+  changePasswordSchema = Joi.object({
     password: Joi.string().required(),
-  },
-  deleteAccount: {
+  });
+
+  deleteAccountSchema = Joi.object({
     password: Joi.string().required(),
-  },
-  setupOAuth : {
+  });
+
+  setupOAuthSchema = Joi.object({
     oauthId: Joi.string().required(),
     email: Joi.string().email().required(),
     oauthType: Joi.string().valid('google', 'apple').required(),
-  },
-  updateProfile: {
+  });
+
+  updateProfileSchema = Joi.object({
     fullName: Joi.string(),
     phoneNumber: Joi.string(),
     location: Joi.string(),
     profileImage: Joi.string(),
-  },
-  getUserProfile: {
-    userId: Joi.string().required(),
-  },
-  uploadImage: {},
-};
+  });
 
-export default authValidation;
+  getUserProfileSchema = Joi.object({
+    userId: Joi.string().required(),
+  });
+
+  uploadImageSchema = Joi.object(); // Define schema as needed
+}
+
+export = AuthValidation;

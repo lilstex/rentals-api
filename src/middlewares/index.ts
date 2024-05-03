@@ -1,9 +1,9 @@
-import { validateMiddleware as validate } from './validate';
-import security from './security';
+import ValidationMiddleware from './validate';
+import Security from './security';
 
 const modules = {
-  validate,
-  security,
+  ValidationMiddleware,
+  Security,
 };
 
 export = modules;
