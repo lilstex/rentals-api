@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { Constants } from "../configs";
 
-class Utils {
+class Helpers {
   testCode: number = 123456;
   testToken: string = '123456';
 
@@ -101,4 +101,4 @@ class Utils {
   }
 }
 
-export = new Utils();
+export = new Helpers();

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { Constants } from '../configs';
 import { cloudinary } from '../utils';
+import { Helper } from '../helpers';
 
 class ImageService {
   async uploadImage(params: any): Promise<{ status: boolean, message: string, data?: any }> {
@@ -32,13 +32,9 @@ class ImageService {
         data
       };
     } catch (error) {
-      console.log(error);
-      return {
-        status: false,
-        message: Constants.SERVER_ERROR('UPLOAD IMAGE TO CLOUDINARY'),
-      };
+      return Helper.handleError(error, 'registerAccount');
     }
   }
 }
 
-export = ImageService;
+export = new ImageService();

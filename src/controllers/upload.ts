@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { upload } from "../services";
-import { response } from "../helpers";
+import { UploadService } from "../services";
+import { ResponseHandler } from "../helpers";
 
 class UploadController {
   async uploadImage(req: Request, res: Response): Promise<void> {
-    const data = await upload.uploadImage(req);
-    return response(res, data);
+    const data = await UploadService.uploadImage(req);
+    return ResponseHandler.sendResponse(res, data);
   }
 }
 

@@ -33,4 +33,7 @@ class ValidationMiddleware {
   }
 }
 
-export = new ValidationMiddleware();
+export {
+  ValidationMiddleware,
+  AuthenticatedRequest
+}

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ResponseHandler } from '../helpers';
-import { auth } from '../services';
+import { AuthService } from '../services';
 
 class AuthMiddleware {
   nonRestrictedEndPoints: string[];
@@ -34,7 +34,7 @@ class AuthMiddleware {
           token = req.headers.authorization;
         }
         const body = { token };
-        const data: any = await auth.validateUserToken(body);
+        const data: any = await AuthService.validateUserToken(body);
         if (!data.status) {
           return ResponseHandler.sendResponse(res, { status: false, message: 'Unauthorized Access' }, 401);
         }

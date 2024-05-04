@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { AuthController, Upload } from "../controllers";
-import { ValidationMiddleware } from "../middlewares";
-import validator from "../validators/auth";
+import { Middleware } from "../middlewares";
+import { Validator } from "../validators";
 import { singleUpload } from "../utils";
 
 const routes = Router();
@@ -10,79 +10,79 @@ routes.get("/", AuthController.welcomeText);
 
 routes.post(
   '/signup',
-  ValidationMiddleware.validateMiddleware(validator.accountRegistration),
-  AuthController.accountRegistration
+  Middleware.validateMiddleware(Validator.registerAccountSchema()),
+  AuthController.registerAccount
 );
 
 routes.post(
   '/login', 
-  ValidationMiddleware.validateMiddleware(validator.login), 
-  AuthController.login
+  Middleware.validateMiddleware( Validator.userLoginSchema()), 
+  AuthController.userLogin
 );
 
 routes.post(
     '/verify-account',
-    ValidationMiddleware.validateMiddleware(validator.verifyAccount),
+    Middleware.validateMiddleware( Validator.verifyAccountSchema()),
     AuthController.verifyAccount
 );
   
 routes.post(
     '/validate-user-token',
-    ValidationMiddleware.validateMiddleware(validator.validateUserToken),
+    Middleware.validateMiddleware( Validator.validateUserTokenSchema()),
     AuthController.validateUserToken
 );
   
 routes.post(
     '/re-send-email-code',
-    ValidationMiddleware.validateMiddleware(validator.reSendEmailCode),
+    Middleware.validateMiddleware( Validator.reSendEmailCodeSchema()),
     AuthController.reSendEmailCode
 );
   
 routes.post(
     '/forgot-password',
-    ValidationMiddleware.validateMiddleware(validator.forgotPassword),
+    Middleware.validateMiddleware( Validator.forgotPasswordSchema()),
     AuthController.forgotPassword
 );
   
 routes.post(
     '/resend-password-reset-link',
-    ValidationMiddleware.validateMiddleware(validator.resendResetPassword),
+    Middleware.validateMiddleware( Validator.resendResetPasswordSchema()),
     AuthController.resendPasswordResetLink
 );
   
 routes.post(
     '/reset-password',
-    ValidationMiddleware.validateMiddleware(validator.updatePassword),
+    Middleware.validateMiddleware( Validator.updatePasswordSchema()),
     AuthController.updatePassword
 );
   
 routes.post(
     '/change-password',
-    ValidationMiddleware.validateMiddleware(validator.changePassword),
+    Middleware.validateMiddleware( Validator.changePasswordSchema()),
     AuthController.changePassword
 );
   
 routes.delete(
     '/delete-account',
-    ValidationMiddleware.validateMiddleware(validator.deleteAccount),
+    Middleware.validateMiddleware( Validator.deleteAccountSchema()),
     AuthController.deleteAccount
 );
 
 routes.post(
     '/setup-oauth',
-    ValidationMiddleware.validateMiddleware(validator.setupOAuth ),
+    Middleware.validateMiddleware( Validator.setupOAuthSchema()),
     AuthController.setupOAuth 
 );
 
 routes.put(
     '/update-profile', 
-    ValidationMiddleware.validateMiddleware(validator.updateProfile), 
+    Middleware.validateMiddleware( Validator.updateProfileSchema()), 
     AuthController.updateProfile
 );
 
 routes.get(
     '/get-user-profile', 
-    ValidationMiddleware.validateMiddleware(validator.getUserProfile), 
+    Middleware.validateMiddleware( Validator.getUserProfileSchema()), 
     AuthController.getUserProfile
 );
 
