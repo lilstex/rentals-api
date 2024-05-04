@@ -1,6 +1,8 @@
 import crypto from 'crypto';
 import { Constants } from "../configs";
 
+const ErrorMessage = new Constants();
+
 class Helpers {
   testCode: number = 123456;
   testToken: string = '123456';
@@ -9,7 +11,7 @@ class Helpers {
     console.error(`Error in ${context}:`, error);
     return {
       status: false,
-      message: Constants.SERVER_ERROR(context),
+      message: ErrorMessage.SERVER_ERROR(context),
     };
   };
   
@@ -101,4 +103,4 @@ class Helpers {
   }
 }
 
-export = new Helpers();
+export = Helpers;

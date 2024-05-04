@@ -1,7 +1,7 @@
-import AuthService from "./auth";
+import Auth from "./auth";
 import UploadService from "./upload";
 
 export {
-  AuthService,
+  Auth,
   UploadService,
 };

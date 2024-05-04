@@ -2,8 +2,10 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
 import { Auth } from '../models';
-import { Helper } from '../helpers';
+import { UtilHelper } from '../helpers';
 import env from '../configs/env';
+
+const Helper = new UtilHelper();
 
 class AuthService {
   private JWTKey: string;
@@ -655,4 +657,4 @@ async updateProfile(params: any): Promise<{ status: boolean, message: string, da
 
 }
 
-export =new AuthService();
+export = AuthService;

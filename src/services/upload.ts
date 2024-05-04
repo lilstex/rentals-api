@@ -1,6 +1,8 @@
 import fs from 'fs';
 import { cloudinary } from '../utils';
-import { Helper } from '../helpers';
+import { UtilHelper } from '../helpers';
+
+const Helper = new UtilHelper();
 
 class ImageService {
   async uploadImage(params: any): Promise<{ status: boolean, message: string, data?: any }> {
@@ -37,4 +39,4 @@ class ImageService {
   }
 }
 
-export = new ImageService();
+export = ImageService;

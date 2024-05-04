@@ -12,4 +12,4 @@ class ErrorMessage {
   }
 }
 
-export = new ErrorMessage();
+export = ErrorMessage;

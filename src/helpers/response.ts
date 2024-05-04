@@ -10,4 +10,4 @@ class ResponseHandler {
   }
 }
 
-export = new ResponseHandler();
+export = ResponseHandler;

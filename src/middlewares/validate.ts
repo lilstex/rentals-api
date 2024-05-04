@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import * as Joi from 'joi';
-import { ResponseHandler } from '../helpers';
+import { CustomResponse } from '../helpers';
+
+const ResponseHandler = new CustomResponse();
 
 interface ValidationObject {
   [key: string]: Joi.Schema;

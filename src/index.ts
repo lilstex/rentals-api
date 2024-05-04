@@ -7,7 +7,10 @@ import dotenv from 'dotenv';
 import routes from './routes';
 import { env, Swagger } from './configs';
 import { Security } from './middlewares';
-import { ResponseHandler } from './helpers';
+import { CustomResponse } from './helpers';
+
+const SecurityMiddleware = new Security();
+const ResponseHandler = new CustomResponse();
 
 class App {
   private app: Express;
@@ -40,7 +43,7 @@ class App {
     this.app.set('views', path.join(__dirname, 'views'));
     this.app.use(cors({ allowedHeaders: ['Content-Type', 'authorization', 'X-access-token'] }));
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(Swagger));
-    this.app.use(Security.authenticate);
+    this.app.use(SecurityMiddleware.authenticate);
   }
 
   private setupRoutes(): void {

@@ -23,4 +23,4 @@ class DatabaseManager {
 }
 
 const databaseManager = new DatabaseManager();
-export = databaseManager;
+export = DatabaseManager;

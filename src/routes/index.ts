@@ -1,7 +1,8 @@
 import { Router, Response } from "express";
-import { ResponseHandler } from "../helpers";
+import { CustomResponse } from "../helpers";
 import authRoutes from "./auth";
 
+const ResponseHandler = new CustomResponse();
 
 const routes = Router();
 

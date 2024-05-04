@@ -1,8 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { ResponseHandler } from '../helpers';
-import { AuthService } from '../services';
+import { CustomResponse } from '../helpers';
+import { Auth } from '../services';
 
-class AuthMiddleware {
+const AuthService = new Auth();
+const ResponseHandler = new CustomResponse();
+
+class SecurityMiddleware {
   nonRestrictedEndPoints: string[];
 
   constructor() {
@@ -45,4 +48,4 @@ class AuthMiddleware {
   }
 }
 
-export = new AuthMiddleware();
+export = SecurityMiddleware;

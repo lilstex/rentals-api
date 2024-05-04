@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
-import { AuthService } from "../services";
-import { ResponseHandler } from "../helpers";
+import { Auth } from "../services";
+import { CustomResponse } from "../helpers";
 import { AuthenticatedRequest } from '../middlewares/validate';
 
+const ResponseHandler = new CustomResponse();
+
+const AuthService = new Auth();
 class AuthController {
   async welcomeText(req: Request, res: Response): Promise<void> {
     const data = await AuthService.welcomeText();
@@ -75,4 +78,4 @@ class AuthController {
   }
 }
 
-export = new AuthController();
+export = AuthController;

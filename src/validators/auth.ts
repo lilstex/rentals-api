@@ -94,4 +94,4 @@ class AuthValidation {
   }
 }
 
-export = new AuthValidation();
+export = AuthValidation;

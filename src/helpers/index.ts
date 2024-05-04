@@ -1,9 +1,9 @@
-import ResponseHandler from "./response";
-import Helper from "./generalHelperFunctions";
+import CustomResponse from "./response";
+import UtilHelper from "./generalHelperFunctions";
 
 const modules = {
-  ResponseHandler,
-  Helper,
+  CustomResponse,
+  UtilHelper,
 };
 
 export = modules;
