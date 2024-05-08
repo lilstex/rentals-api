@@ -12,8 +12,8 @@ class DatabaseManager {
   async connect(): Promise<void> {
     try {
       await mongoose.connect(this.DATABASE_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
       });
       console.log('Database connected successfully!');
     } catch (error) {
@@ -22,5 +22,4 @@ class DatabaseManager {
   }
 }
 
-const databaseManager = new DatabaseManager();
-export = DatabaseManager;
+export = new DatabaseManager();

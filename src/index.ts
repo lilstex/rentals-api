@@ -5,12 +5,12 @@ import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import routes from './routes';
-import { env, Swagger } from './configs';
+import { env, Swagger, DatabaseManager } from './configs';
 import { Security } from './middlewares';
 import { CustomResponse } from './helpers';
 
-const SecurityMiddleware = new Security();
 const ResponseHandler = new CustomResponse();
+const SecurityMiddleware = new Security(); 
 
 class App {
   private app: Express;
@@ -29,6 +29,7 @@ class App {
     this.setupErrorHandler();
 
     if (require.main === module) {
+      DatabaseManager.connect();
       this.server.listen(this.port, () => {
         console.log(`NestFinder API is running on http://localhost:${this.port}/api-docs`);
       });
@@ -43,7 +44,10 @@ class App {
     this.app.set('views', path.join(__dirname, 'views'));
     this.app.use(cors({ allowedHeaders: ['Content-Type', 'authorization', 'X-access-token'] }));
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(Swagger));
-    this.app.use(SecurityMiddleware.authenticate);
+    this.app.use(this.authenticateMiddleware.bind(this));
+  }
+  private authenticateMiddleware(req: Request, res: Response, next: NextFunction): void {
+    SecurityMiddleware.authenticate(req, res, next); // Call authenticate method on the securityMiddleware instance
   }
 
   private setupRoutes(): void {

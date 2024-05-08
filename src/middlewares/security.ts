@@ -5,8 +5,8 @@ import { Auth } from '../services';
 const AuthService = new Auth();
 const ResponseHandler = new CustomResponse();
 
-class SecurityMiddleware {
-  nonRestrictedEndPoints: string[];
+export default class SecurityMiddleware {
+  private nonRestrictedEndPoints: string[];
 
   constructor() {
     this.nonRestrictedEndPoints = [
@@ -48,4 +48,4 @@ class SecurityMiddleware {
   }
 }
 
-export = SecurityMiddleware;
+// export default new SecurityMiddleware();
